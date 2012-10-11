@@ -1,0 +1,123 @@
+package de.rc.jobticket.beans;
+import java.io.Serializable;
+import java.util.List;
+
+import javax.faces.bean.ManagedBean;
+
+import de.rc.DBZugriff;
+import de.rc.jobticket.entities.Job;
+import de.rc.jobticket.entities.Jobbearbeiter;
+
+
+/**
+ * 
+ */
+
+/**
+ * @author janine
+ * 
+ */
+@ManagedBean
+public class MainBean implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8219147740616521605L;
+	private ProduktBean produktBean;
+	private JobBean jobBean;
+	private KundenBean kundenBean;
+	private AngestellteBean angestellteBean;
+	private DBZugriff dbAccess;
+
+	public MainBean() {
+
+		produktBean = new ProduktBean();
+		jobBean = new JobBean();
+		kundenBean = new KundenBean();
+		angestellteBean = new AngestellteBean();
+		dbAccess = new DBZugriff();
+	}
+
+	/**
+	 * @return the produktBean
+	 */
+	public ProduktBean getProduktBean() {
+		return produktBean;
+	}
+
+	/**
+	 * @param produktBean
+	 *            the produktBean to set
+	 */
+	public void setProduktBean(ProduktBean produktBean) {
+		this.produktBean = produktBean;
+	}
+
+	/**
+	 * @return the jobBean
+	 */
+	public JobBean getJobBean() {
+		return jobBean;
+	}
+
+	/**
+	 * @return the kundenBean
+	 */
+	public KundenBean getKundenBean() {
+		return kundenBean;
+	}
+
+	/**
+	 * @param kundenBean
+	 *            the kundenBean to set
+	 */
+	public void setKundenBean(KundenBean kundenBean) {
+		this.kundenBean = kundenBean;
+	}
+
+	/**
+	 * @param jobBean
+	 *            the jobBean to set
+	 */
+	public void setJobBean(JobBean jobBean) {
+		this.jobBean = jobBean;
+	}
+
+	/**
+	 * @return the angestellteBean
+	 */
+	public AngestellteBean getAngestellteBean() {
+		return angestellteBean;
+	}
+
+	/**
+	 * @param angestellteBean
+	 *            the angestellteBean to set
+	 */
+	public void setAngestellteBean(AngestellteBean angestellteBean) {
+		this.angestellteBean = angestellteBean;
+	}
+
+	public Jobbearbeiter erstelleJobbearbeiter(Job job) {
+		Jobbearbeiter jobbearbeiter = new Jobbearbeiter();
+		jobbearbeiter.setAngestellte(dbAccess
+				.findAngestelltenWithFullname(angestellteBean
+						.getAngestellte_name()));
+		jobbearbeiter.setJob(job);
+		dbAccess.addEintrag(jobbearbeiter, dbAccess.createEntitymanager());
+
+		return dbAccess.findJobbearbeiter(jobbearbeiter);
+	}
+
+	public void speichern() throws Exception {
+		Job job_db = jobBean.erstelleJob();
+		if (job_db != null) {
+			Jobbearbeiter jobbearbeiter = erstelleJobbearbeiter(job_db);
+			if (jobbearbeiter != null) {
+				job_db.getJobbearbeiters().add(jobbearbeiter);
+			}
+			produktBean.erstelleProdukt(job_db);
+		}
+	}
+}

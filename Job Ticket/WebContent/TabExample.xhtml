@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:test="http://example.com/test"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<f:view contentType="text/html" locale="de">
+	<pe:head title="Empty-Title"
+		shortcutIcon="#{request.contextPath}/favicon.ico">
+		<f:facet name="first">
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+			<meta http-equiv="pragma" content="no-cache" />
+			<meta http-equiv="cache-control" content="no-cache" />
+			<meta http-equiv="expires" content="0" />
+		</f:facet>
+		<link type="text/css" rel="stylesheet"
+			href="/Job_Ticket/mainstyle.css" />
+		<script type="text/javascript" src="/Job_Ticket/styling.js" />
+	</pe:head>
+
+	<h:body>
+		<pe:ajaxErrorHandler />
+		<h:form id="tabExample">
+			<p:tabView id="tabView" var="data" value="#{tabTestBean.data}"
+				styleClass="produktTabview">
+
+				<p:ajax event="tabChange" listener="#{tabTestBean.onTabChange}" />
+				<p:tab id="dataTab" title="#{data}">
+
+					<h:panelGrid columns="2">
+						<h:outputText value="Name: " />
+						<h:outputText id="dataName" value="#{data}"
+							style="font-weight: bold" />
+
+					</h:panelGrid>
+
+				</p:tab>
+			</p:tabView>
+
+			<p:commandButton value="+" update="@all"
+				actionListener="#{tabTestBean.addTab}" />
+		</h:form>
+		<h:form>
+			<test:customComponent value="test" />
+			<test:customComponent value="test2" />
+			<input name="blubb"></input>
+		</h:form>
+		<p:panelGrid>
+			<p:row>
+				<p:column>
+					<ui:repeat var="angestellter" value="#{tabTestBean.data}">
+						<p:panelGrid>
+							<p:row>
+								<p:column>hiho</p:column>
+							</p:row>
+						</p:panelGrid>
+					</ui:repeat>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+	</h:body>
+</f:view>
+</html>

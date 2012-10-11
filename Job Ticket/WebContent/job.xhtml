@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<f:view contentType="text/html" locale="de">
+	<pe:head title="Empty-Title"
+		shortcutIcon="#{request.contextPath}/favicon.ico">
+		<f:facet name="first">
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+			<meta http-equiv="pragma" content="no-cache" />
+			<meta http-equiv="cache-control" content="no-cache" />
+			<meta http-equiv="expires" content="0" />
+		</f:facet>
+	</pe:head>
+
+	<h:body>
+		<pe:ajaxErrorHandler />
+		<h:form id="jobEingabeSmall">
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Job" for="inputJobbez" />
+				<p:inputText id="inputJobbez" value="#{jobBean.job}" />
+
+				<h:outputLabel value="Kundenname*" for="inputKundenname" />
+				<p:autoComplete id="inputKundenname" value="#{jobBean.kundenname}"
+					completeMethod="#{jobBean.completeKundennamen}" queryDelay="0">
+					<p:ajax event="itemSelect" listener="#{jobBean.findKundenKuerzel}"
+						update="inputKundenkuerzel" />
+				</p:autoComplete>
+
+				<h:outputLabel value="Kundenkürzel*" for="inputKundenkuerzel" />
+				<p:autoComplete id="inputKundenkuerzel"
+					value="#{jobBean.kundenkuerzel}"
+					completeMethod="#{jobBean.completeKundenkuerzel}">
+					<p:ajax event="itemSelect" listener="#{jobBean.findKundenname}"
+						update="inputKundenname" />
+				</p:autoComplete>
+
+			</h:panelGrid>
+			<p:commandButton value="erstelle Job" update="jobEingabeSmall"
+				actionListener="#{jobBean.erstelleJob}" />
+		</h:form>
+
+		<h:form id="display">
+			<p:dataTable id="datenTabelle" var="job" value="#{jobBean.jobliste}">
+
+				<p:column>
+					<f:facet name="header">
+							Jobbeschreibung
+						</f:facet>
+					<h:outputText value="#{job.jobbeschreibung}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							ID
+						</f:facet>
+					<h:outputText value="#{job.id}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							Jobname
+						</f:facet>
+					<h:outputText value="#{job.name}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+							Kunde
+						</f:facet>
+					<h:outputText value="#{job.kunden.kunde}" />
+				</p:column>
+				<p:column>
+
+					<f:facet name="header">
+						Angestellte
+					</f:facet>
+
+
+					<h:dataTable id="angestelltenTabelle" var="jobbearbeiter"
+						value="#{job.jobbearbeiters}"
+						style="border-spacing:0px;border-color:transparent">
+						<p:column>
+							<h:outputText
+								value="#{jobbearbeiter.angestellte.vorname} #{jobbearbeiter.angestellte.nachname} - #{jobbearbeiter.angestellte.angestelltenbezeichnungen.bezeichnung}"></h:outputText>
+						</p:column>
+					</h:dataTable>
+				</p:column>
+
+			</p:dataTable>
+			<p:commandButton update="display" value="Reload" />
+		</h:form>
+
+
+	</h:body>
+</f:view>
+</html>

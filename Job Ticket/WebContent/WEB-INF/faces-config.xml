@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">
+	<managed-bean>
+		<managed-bean-name>angestellteBean</managed-bean-name>
+		<managed-bean-class>de.rc.jobticket.beans.AngestellteBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>kundenBean</managed-bean-name>
+		<managed-bean-class>de.rc.jobticket.beans.KundenBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>jobBean</managed-bean-name>
+		<managed-bean-class>de.rc.jobticket.beans.JobBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>produktBean</managed-bean-name>
+		<managed-bean-class>de.rc.jobticket.beans.ProduktBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>mainBean</managed-bean-name>
+		<managed-bean-class>de.rc.jobticket.beans.MainBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>kostenBean</managed-bean-name>
+		<managed-bean-class>de.rc.jobticket.beans.KostenBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>dynamicTestBean</managed-bean-name>
+		<managed-bean-class>de.rc.jobticket.beans.DynamicTestBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>tabTestBean</managed-bean-name>
+		<managed-bean-class>de.rc.jobticket.beans.TabTestBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+</faces-config>

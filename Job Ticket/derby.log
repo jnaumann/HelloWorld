@@ -1,0 +1,15 @@
+Thu Oct 11 15:07:04 CEST 2012 : Apache Derby Network Server 10.9.1.0 - (1344872) wurde gestartet und ist bereit, Verbindungen am Port 1527 zu akzeptieren.
+----------------------------------------------------------------
+Thu Oct 11 15:07:09 CEST 2012:
+Booten von Derby Version The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): Instanz a816c00e-013a-4fef-7302-ffffd8634c87
+für Datenbankverzeichnis C:\Users\Shiru\Jobticket\workspace\Job Ticket\jobticket   mit Klassenladeprogrammn sun.misc.Launcher$AppClassLoader@92e78c
+
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_07-b10
+user.dir=C:\Users\Shiru\Jobticket\workspace\Job Ticket
+derby.system.home=C:\Users\Shiru\Jobticket\workspace\Job Ticket
+Das Ladeprogramm für Datenbankklassen wurde gestartet - derby.database.classpath=''
+----------------------------------------------------------------
+Thu Oct 11 15:24:26 CEST 2012:
+Instanz a816c00e-013a-4fef-7302-ffffd8634c87 im Datenbankverzeichnis C:\Users\Shiru\Jobticket\workspace\Job Ticket\jobticket mit Klassenlader sun.misc.Launcher$AppClassLoader@92e78c wird heruntergefahren
+Thu Oct 11 15:24:26 CEST 2012 Thread[DRDAConnThread_4,5,main] (DATABASE = jobticket), (DRDAID = {2}), Die Datenbank 'jobticket' wird heruntergefahren.

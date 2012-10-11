@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<f:view contentType="text/html" locale="de">
+	<pe:head title="Empty-Title"
+		shortcutIcon="#{request.contextPath}/favicon.ico">
+		<f:facet name="first">
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+			<meta http-equiv="pragma" content="no-cache" />
+			<meta http-equiv="cache-control" content="no-cache" />
+			<meta http-equiv="expires" content="0" />
+		</f:facet>
+	</pe:head>
+
+	<h:body>
+		<pe:ajaxErrorHandler />
+		<h:form>
+			<h:panelGrid id="mainGrid" style="padding-left:25%">
+				<h:panelGrid id="headOuterGrid" columns="2" style="border:1px">
+					<h:panelGrid id="headFirstInnerGrid" columns="2">
+						<h:outputLabel value="Jobnummer" for="inputJobNr" />
+						<p:inputText id="inputJobNr" value="Empty" />
+						<h:outputLabel value="Kundenname*" for="inputKundenName" />
+						<p:inputText id="inputKundenName" value="Empty" />
+						<h:outputLabel value="Job*" for="inputJob" />
+						<p:inputText id="inputJob" value="Empty" />
+					</h:panelGrid>
+					<h:panelGrid id="headSecondInnerGrid" columns="2">
+						<h:outputLabel value="alte Jobnummer" for="inputAlteJobNr" />
+						<p:inputText id="inputAlteJobNr" value="Empty" />
+						<h:outputLabel value="Kundenkürzel*" for="inputKundenkuerzel" />
+						<p:inputText id="inputKundenkuerzel" value="Empty" />
+					</h:panelGrid>
+				</h:panelGrid>
+			</h:panelGrid>
+		</h:form>
+	</h:body>
+</f:view>
+</html>

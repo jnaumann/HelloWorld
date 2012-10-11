@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<f:view contentType="text/html" locale="de">
+	<pe:head title="Empty-Title"
+		shortcutIcon="#{request.contextPath}/favicon.ico">
+		<f:facet name="first">
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+			<meta http-equiv="pragma" content="no-cache" />
+			<meta http-equiv="cache-control" content="no-cache" />
+			<meta http-equiv="expires" content="0" />
+		</f:facet>
+	</pe:head>
+
+	<h:body>
+		<pe:ajaxErrorHandler />
+		<p:commandButton id="submitButton" value="Neuer Kunde"
+			actionListener="#{kundenBean.setDlgShouldBeHidden}"
+			update="kundenDlg" />
+
+		<p:dialog id="kundenDlg"
+			header="Neuen Kunden in die Datenbank hinzufügen" widgetVar="dlg"
+			resizable="false" visible="#{kundenBean.dlgShouldBeHidden}"
+			onHide="#{kundenBean.dlgShouldBeHidden}">
+			<h:form id="dlgForm">
+				<h:panelGrid columns="2" style="margin-bottom:10px">
+					<h:outputLabel for="kunde" value="Neuer Kunde*:" />
+					<h:panelGrid columns="1">
+						<p:inputText id="kunde" value="#{kundenBean.kunde_kunde}" />
+						<h:outputLabel style="color:red;font-size:75%" for="kunde"
+							value="Bitte eingeben" rendered="#{kundenBean.emptyField_kunde}" />
+					</h:panelGrid>
+
+					<h:outputLabel for="kundenkuerzel" value="Neues Kundenkürzel*:" />
+					<h:panelGrid columns="1">
+						<p:inputText id="kundenkuerzel"
+							value="#{kundenBean.kunde_kuerzel}" />
+						<h:outputLabel style="color:red;font-size:75%" for="kundenkuerzel"
+							value="Bitte eingeben"
+							rendered="#{kundenBean.emptyField_kundenkuerzel}" />
+					</h:panelGrid>
+
+					<h:outputLabel for="adresse" value="Neue Adresse:" />
+					<p:inputText id="adresse" value="#{kundenBean.kunde_adresse}" />
+					<h:outputLabel for="telefon" value="Neue Telefonnummer:" />
+					<p:inputText id="telefon" value="#{kundenBean.kunde_telefon}" />
+
+				</h:panelGrid>
+
+				<!-- :display sorgt dafür, dass aus dem aktuellen Form rausgegangen wird(1 Schritt rückwärts) -->
+				<p:commandButton id="submitButton" value="Submit"
+					update=":display,:kundenDlg"
+					actionListener="#{kundenBean.erstelleKunden}" />
+			</h:form>
+		</p:dialog>
+
+		<h:form id="display">
+			<p:dataTable id="datenTabelle" var="kunden"
+				value="#{kundenBean.kunden}" rendered="#{kundenBean.showTable}">
+				<p:column>
+					<f:facet name="header">
+							ID
+						</f:facet>
+					<h:outputText value="#{kunden.id}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							Kunde
+						</f:facet>
+					<h:outputText value="#{kunden.kunde}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							Kundenkürzel
+						</f:facet>
+					<h:outputText value="#{kunden.kundenkuerzel}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							Adresse
+						</f:facet>
+					<h:outputText value="#{kunden.adresse}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							Telefon
+						</f:facet>
+					<h:outputText value="#{kunden.telefon}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+	</h:body>
+</f:view>
+</html>

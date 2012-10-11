@@ -1,0 +1,153 @@
+NotizDatei
+
+
+actionListener="#{mainBean.speichern}"
+
+
+	<p:row>
+					<p:column></p:column>
+					<p:column colspan="2">
+						<p:dataTable value="#{angestellteBean.angestelltenSammlung}"
+							var="sammlung" styleClass="Angestelltentabelle"
+							id="dynamicAngestellte">
+							<p:columns value="#{angestellteBean.columns}" var="column"
+								columnIndexVar="colIndex">
+
+								<h:outputText value="#{sammlung[column.property]}"
+									rendered="#{angestellteBean.shouldOutputtextRender[colIndex]}"
+									styleClass="angestellteLable" />
+
+								<p:autoComplete id="inputAngestellte"
+									value="#{sammlung[column.property]}"
+									completeMethod="#{sammlung.completeAngestelltename}"
+									queryDelay="0"
+									rendered="#{angestellteBean.shouldInputtextRender[colIndex]}"
+									styleClass="angestellteOutput" />
+
+
+							</p:columns>
+						</p:dataTable>
+					</p:column>
+				</p:row>
+				
+				
+				<p:row>
+	
+					<p:column colspan="1">
+						<p:panel header="Aufwand">
+						</p:panel>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<ui:repeat var="angestellter"
+							value="#{mainBean.angestellteBean.angestelltenSammlung}">
+							<p:panelGrid id="angestellteGrid" styleClass="angestellteGrid">
+								<p:row>
+									<p:column styleClass="minusButtonCell buttonColumn">
+										<p:commandButton styleClass="angestellteLöschenButton"
+											value="-" rendered="#{mainBean.angestellteModel.renderMinus}"
+											actionListener="#{mainBean.angestellteBean.deleteAngestellten}"
+											update=":mainForm:aufwandGrid" />
+									</p:column>
+									<p:columns styleClass="angestellteOutputLabel">
+										<h:outputLabel for="angestellte"
+											value="#{angestellter.angestelltenbezeichnung}" />
+									</p:columns>
+									<p:column styleClass="inputAngestellteColumn">
+										<p:autoComplete id="angestellte"
+											value="#{angestellter.angestellte_name}"
+											completeMethod="#{angestellter.completeAngestelltenname}"
+											queryDelay="0" styleClass="angestellteInPutField">
+										</p:autoComplete>
+									</p:column>
+									<p:column styleClass="angestellterButtonColumn">
+										<p:commandButton value="▼" styleClass="angestellteplusButton"
+											actionListener="#{mainBean.angestellteBean.setDlgShouldBeHidden}"
+											update=":angeDlg" />
+									</p:column>
+									<p:column styleClass="aufwandOutPutColumn">
+										<h:outputLabel value="Aufwand in €"
+											rendered="#{mainBean.kostenBean.abrechnungInEuro}"
+											for="kostenInEuro" />
+										<h:outputLabel value="Aufwand in Std"
+											rendered="#{mainBean.kostenBean.abrechnungInStd}"
+											for="kostenInStd" />
+									</p:column>
+									<p:columns styleClass="aufwandInPutColumn">
+										<p:inputText id="kostenInEuro"
+											rendered="#{mainBean.kostenBean.abrechnungInEuro}"
+											value="#{mainBean.kostenBean.kostenInEuro}"
+											styleClass="aufwandInPutField">
+											<p:ajax event="blur" update="kostenInEuro" />
+										</p:inputText>
+										<p:inputText id="kostenInStd"
+											rendered="#{mainBean.kostenBean.abrechnungInStd}"
+											value="#{mainBean.kostenBean.kostenInStd}"
+											styleClass="aufwandInPutField">
+											<p:ajax event="blur" update="kostenInStd" />
+										</p:inputText>
+									</p:columns>
+									<p:column styleClass="aufwandButtonColumn">
+										<p:commandButton value="€" styleClass="angestellteplusButton"
+											update=":mainForm:aufwandGrid"
+											actionListener="#{mainBean.kostenBean.switchKosten}" />
+									</p:column>
+								</p:row>
+							</p:panelGrid>
+						</ui:repeat>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:commandButton value="+" styleClass="produktPlusButton"
+							actionListener="#{mainBean.angestellteBean.addAngestellten}"
+							update=":mainForm:aufwandGrid" />
+						<p:commandButton value="-" styleClass="minusButton"
+							actionListener="#{mainBean.angestellteModel.renderMinusButton}"
+							update=":mainForm:aufwandGrid" />
+					</p:column>
+					<p:column styleClass="buttonColumn"></p:column>
+				</p:row>
+
+			</p:panelGrid>
+			<p:panelGrid>
+				<p:row>
+					<p:column styleClass="buttonColumn">
+					</p:column>
+					<p:column colspan="5">
+						<p:separator styleClass="budgetSeparator separatorOben" />
+					</p:column>
+					<p:column>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="buttonColumn">
+						<p:commandButton styleClass="achtungButton" value="!" />
+					</p:column>
+					<p:columns>
+					</p:columns>
+					<p:column>
+					</p:column>
+					<p:column>
+
+					</p:column>
+					<p:column>
+						<h:outputLabel value="Budget" for="budget" />
+					</p:column>
+					<p:columns>
+						<p:inputText id="budget" />
+					</p:columns>
+					<p:column>
+						<p:commandButton value="€" styleClass="budgetButton" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="buttonColumn">
+					</p:column>
+					<p:column colspan="5">
+						<p:separator styleClass="budgetSeparator separatorUnten" />
+					</p:column>
+					<p:column>
+					</p:column>
+				</p:row>

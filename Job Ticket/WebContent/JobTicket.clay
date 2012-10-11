@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<clay-model clay-version="2.0.1">
+<database-model author="" begin-script="" end-script="" id="4eaaeab1:137a6d3cd9f:-7ffa" name="JobTicket" sql-dialect-id="jp.azzurri.clay.dialect.MySQL_5_0_Dialect" version="1.0">
+<schema-list>
+<schema id="4eaaeab1:137a6d3cd9f:-7ff7" name="DEFAULT_SCHEMA">
+<table-list>
+<table id="4eaaeab1:137a6d3cd9f:-7ff9" name="jobs">
+<column-list>
+<column auto-increment="true" column-size="0" decimal-digits="0" default-value="" id="4eaaeab1:137a6d3cd9f:-7ff2" mandatory="true" name="id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="20" decimal-digits="0" default-value="" id="4eaaeab1:137a6d3cd9f:-7fed" mandatory="true" name="name">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="2d3e0f93:137bca8c940:-7e6f" mandatory="false" name="alte_jobnummer">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="4eaaeab1:137a6d3cd9f:-7feb" mandatory="true" name="eingang">
+<data-type name="DATE" selected-variant-pattern="DATE"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="4eaaeab1:137a6d3cd9f:-7fea" mandatory="false" name="ausgang">
+<data-type name="DATE" selected-variant-pattern="DATE"/>
+</column>
+<column auto-increment="false" column-size="10" decimal-digits="0" default-value="" id="4eaaeab1:137a6d3cd9f:-7fe7" mandatory="false" name="empfaenger">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="10" decimal-digits="0" default-value="" id="4eaaeab1:137a6d3cd9f:-7fe6" mandatory="false" name="print">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="4eaaeab1:137a6d3cd9f:-7fe5" mandatory="false" name="jobbeschreibung">
+<data-type name="TEXT" selected-variant-pattern="TEXT"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="4eaaeab1:137a6d3cd9f:-7ef1" mandatory="true" name="produkte_id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="4eaaeab1:137a6d3cd9f:-7fec" mandatory="true" name="kunden_id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="4eaaeab1:137a6d3cd9f:-7fe8" mandatory="true" name="mitarbeiter_id_grafiker">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="4eaaeab1:137a6d3cd9f:-7fe9" mandatory="true" name="mitarbeiter_id_kontakter">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="5d259e26:137c133a973:-7fdd" mandatory="false" name="kosten_id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+</column-list>
+<primary-key id="4eaaeab1:137a6d3cd9f:-7ff8" name="PK_JOBS">
+<primary-key-column name="id"/>
+</primary-key>
+<foreign-key-list>
+<foreign-key id="4eaaeab1:137a6d3cd9f:-7f14" name="FK_jobs_kunden" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_KUNDEN" referenced-table="kunden" referenced-table-schema="DEFAULT_SCHEMA" source-entity-role="" source-multiplicity="1..*" source-relationship-type="" target-entity-role="" target-multiplicity="0..1" target-relationship-type="">
+<foreign-key-column column-name="kunden_id" referenced-key-column-name="id"/>
+</foreign-key>
+<foreign-key id="5d259e26:137c133a973:-7fb7" name="FK_jobs_5" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_KOSTEN" referenced-table="kosten" referenced-table-schema="DEFAULT_SCHEMA" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="kosten_id" referenced-key-column-name="id"/>
+</foreign-key>
+<foreign-key id="29386c7:137c1c2b204:-7be9" name="FK_jobs_3" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_PRODUKTE" referenced-table="Produkte" referenced-table-schema="DEFAULT_SCHEMA" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="produkte_id" referenced-key-column-name="id"/>
+</foreign-key>
+<foreign-key id="29386c7:137c1c2b204:-7bbe" name="FK_jobs_4" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_MITARBEITER" referenced-table="mitarbeiter" referenced-table-schema="DEFAULT_SCHEMA" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="mitarbeiter_id_grafiker" referenced-key-column-name="id"/>
+</foreign-key>
+</foreign-key-list>
+</table>
+<table id="4eaaeab1:137a6d3cd9f:-7fe2" name="kosten">
+<column-list>
+<column auto-increment="true" column-size="0" decimal-digits="0" default-value="" id="4eaaeab1:137a6d3cd9f:-7fde" mandatory="true" name="id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="8" decimal-digits="2" default-value="" id="4eaaeab1:137a6d3cd9f:-7fdc" mandatory="false" name="budget_in_std">
+<data-type name="DECIMAL" selected-variant-pattern="DECIMAL(%p, %s)"/>
+</column>
+<column auto-increment="false" column-size="10" decimal-digits="2" default-value="" id="4eaaeab1:137a6d3cd9f:-7fdb" mandatory="false" name="budget_in_euro">
+<data-type name="DECIMAL" selected-variant-pattern="DECIMAL(%p, %s)"/>
+</column>
+<column auto-increment="false" column-size="10" decimal-digits="2" default-value="" id="2d3e0f93:137bca8c940:-7fe9" mandatory="false" name="arbeitsaufwand_in_euro">
+<data-type name="DECIMAL" selected-variant-pattern="DECIMAL(%p, %s)"/>
+</column>
+<column auto-increment="false" column-size="10" decimal-digits="2" default-value="" id="2d3e0f93:137bca8c940:-7fe8" mandatory="false" name="arbeitsaufwand_in_std">
+<data-type name="DECIMAL" selected-variant-pattern="DECIMAL(%p, %s)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="2d3e0f93:137bca8c940:-7e72" mandatory="false" name="kommentar">
+<data-type name="TEXT" selected-variant-pattern="TEXT"/>
+</column>
+</column-list>
+<primary-key id="4eaaeab1:137a6d3cd9f:-7fe1" name="PK_KOSTEN">
+<primary-key-column name="id"/>
+</primary-key>
+</table>
+<table id="4eaaeab1:137a6d3cd9f:-7f2b" name="kunden">
+<column-list>
+<column auto-increment="true" column-size="0" decimal-digits="0" default-value="" id="4eaaeab1:137a6d3cd9f:-7f27" mandatory="true" name="id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="50" decimal-digits="0" default-value="" id="4eaaeab1:137a6d3cd9f:-7f26" mandatory="true" name="kunde">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="50" decimal-digits="0" default-value="" id="4eaaeab1:137a6d3cd9f:-7f24" mandatory="false" name="adresse">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="50" decimal-digits="0" default-value="" id="4eaaeab1:137a6d3cd9f:-7f23" mandatory="false" name="telefon">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="10" decimal-digits="0" default-value="" id="2d3e0f93:137bca8c940:-7e6c" mandatory="false" name="kundenkuerzel">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+</column-list>
+<primary-key id="4eaaeab1:137a6d3cd9f:-7f2a" name="PK_KUNDEN">
+<primary-key-column name="id"/>
+</primary-key>
+</table>
+<table id="4eaaeab1:137a6d3cd9f:-7e98" name="produkteigenschaften">
+<column-list>
+<column auto-increment="true" column-size="0" decimal-digits="0" default-value="" id="4eaaeab1:137a6d3cd9f:-7e71" mandatory="true" name="id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="2d3e0f93:137bca8c940:-7f3d" mandatory="false" name="fomat">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="2d3e0f93:137bca8c940:-7f3c" mandatory="false" name="beschnitt">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="2d3e0f93:137bca8c940:-7f3b" mandatory="false" name="seitenzahl">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="50" decimal-digits="0" default-value="" id="2d3e0f93:137bca8c940:-7f3a" mandatory="false" name="falzung">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="10" decimal-digits="0" default-value="" id="2d3e0f93:137bca8c940:-7f39" mandatory="false" name="farbe_4c">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="10" decimal-digits="0" default-value="" id="2d3e0f93:137bca8c940:-7f36" mandatory="false" name="farbe_sw">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="50" decimal-digits="0" default-value="" id="2d3e0f93:137bca8c940:-7f35" mandatory="false" name="sonderfarbe">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="50" decimal-digits="0" default-value="" id="2d3e0f93:137bca8c940:-7f34" mandatory="false" name="bindung">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="2d3e0f93:137bca8c940:-7f33" mandatory="false" name="proof">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="2d3e0f93:137bca8c940:-7f32" mandatory="false" name="dummy">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="29386c7:137c1c2b204:-7dcd" mandatory="false" name="produktbeschreibung">
+<data-type name="TEXT" selected-variant-pattern="TEXT"/>
+</column>
+</column-list>
+<primary-key id="4eaaeab1:137a6d3cd9f:-7e97" name="PK_PRODUKTEIGENSCHAFTEN">
+<primary-key-column name="id"/>
+</primary-key>
+</table>
+<table id="29386c7:137c1c2b204:-7dc4" name="Produkte">
+<column-list>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="29386c7:137c1c2b204:-7dbc" mandatory="true" name="id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="29386c7:137c1c2b204:-7dbb" mandatory="true" name="eigenschaften_id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="29386c7:137c1c2b204:-7d25" mandatory="true" name="produkt_id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+</column-list>
+<primary-key id="29386c7:137c1c2b204:-7dc3" name="PK_PRODUKTE">
+<primary-key-column name="id"/>
+</primary-key>
+<foreign-key-list>
+<foreign-key id="29386c7:137c1c2b204:-7d86" name="FK_Produkte_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_PRODUKTEIGENSCHAFTEN" referenced-table="produkteigenschaften" referenced-table-schema="DEFAULT_SCHEMA" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="produkt_id" referenced-key-column-name="id"/>
+</foreign-key>
+</foreign-key-list>
+</table>
+<table id="29386c7:137c1c2b204:-7d10" name="mitarbeiter">
+<column-list>
+<column auto-increment="true" column-size="0" decimal-digits="0" default-value="" id="29386c7:137c1c2b204:-7d08" mandatory="true" name="id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="29386c7:137c1c2b204:-7d07" mandatory="true" name="mitarbeiter_id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="29386c7:137c1c2b204:-7d06" mandatory="true" name="angestellte_id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+</column-list>
+<primary-key id="29386c7:137c1c2b204:-7d0f" name="PK_MITARBEITER">
+<primary-key-column name="id"/>
+</primary-key>
+<foreign-key-list>
+<foreign-key id="29386c7:137c1c2b204:-7cc0" name="FK_mitarbeiter_2" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_ANGETELLTE" referenced-table="angetellte" referenced-table-schema="DEFAULT_SCHEMA" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="angestellte_id" referenced-key-column-name="id"/>
+</foreign-key>
+</foreign-key-list>
+</table>
+<table id="4eaaeab1:137a6d3cd9f:-7f9b" name="angetellte">
+<column-list>
+<column auto-increment="true" column-size="0" decimal-digits="0" default-value="" id="4eaaeab1:137a6d3cd9f:-7f97" mandatory="true" name="id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="50" decimal-digits="0" default-value="" id="4eaaeab1:137a6d3cd9f:-7f96" mandatory="true" name="vorname">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="50" decimal-digits="0" default-value="" id="4eaaeab1:137a6d3cd9f:-7f95" mandatory="true" name="nachname">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="2d3e0f93:137bca8c940:-7fe1" mandatory="false" name="typ">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="10" decimal-digits="2" default-value="" id="2d3e0f93:137bca8c940:-7fe0" mandatory="false" name="stundenlohn">
+<data-type name="DECIMAL" selected-variant-pattern="DECIMAL(%p, %s)"/>
+</column>
+</column-list>
+<primary-key id="4eaaeab1:137a6d3cd9f:-7f9a" name="PK_ANGETELLTE">
+<primary-key-column name="id"/>
+</primary-key>
+</table>
+</table-list>
+</schema>
+</schema-list>
+</database-model>
+<diagram>
+<table-figure refid="4eaaeab1:137a6d3cd9f:-7ff9" x="351" y="139"/>
+<table-figure refid="4eaaeab1:137a6d3cd9f:-7fe2" x="610" y="81"/>
+<table-figure refid="4eaaeab1:137a6d3cd9f:-7f2b" x="630" y="255"/>
+<table-figure refid="4eaaeab1:137a6d3cd9f:-7e98" x="383" y="470"/>
+<table-figure height="61" refid="29386c7:137c1c2b204:-7dc4" width="117" x="382" y="362"/>
+<table-figure height="57" refid="29386c7:137c1c2b204:-7d10" width="113" x="142" y="130"/>
+<table-figure refid="4eaaeab1:137a6d3cd9f:-7f9b" x="7" y="228"/>
+</diagram>
+</clay-model>

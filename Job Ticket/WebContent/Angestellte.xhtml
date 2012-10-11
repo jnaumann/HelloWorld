@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<f:view contentType="text/html" locale="de">
+	<pe:head title="Empty-Title"
+		shortcutIcon="#{request.contextPath}/favicon.ico">
+		<f:facet name="first">
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+			<meta http-equiv="pragma" content="no-cache" />
+			<meta http-equiv="cache-control" content="no-cache" />
+			<meta http-equiv="expires" content="0" />
+		</f:facet>
+	</pe:head>
+
+	<h:body>
+		<pe:ajaxErrorHandler />
+		<p:commandButton id="submitButton" value="Neuer Eintrag"
+			actionListener="#{angestellteBean.setDlgShouldBeHidden}" update="angeDlg" />
+
+		<p:dialog id="angeDlg"
+			header="Neuen Angestellten in die Datenbank hinzufügen"
+			widgetVar="dlg" resizable="false"
+			visible="#{angestellteBean.dlgShouldBeHidden}"
+			onHide="#{angestellteBean.dlgShouldBeHidden}">
+			<h:form id="dlgForm">
+				<h:panelGrid columns="2" style="margin-bottom:10px">
+					<h:outputLabel for="vorname" value="Neuer Vorname*:" />
+					<h:panelGrid columns="1">
+						<p:inputText id="vorname" value="#{angestellteBean.angestellte_vorname}" />
+						<h:outputLabel style="color:red;font-size:75%" for="vorname" value="Bitte eingeben"
+							rendered="#{angestellteBean.emptyField_vorname}" />
+					</h:panelGrid>
+
+					<h:outputLabel for="nachname" value="Neuer Nachname*:" />
+					<h:panelGrid columns="1">
+						<p:inputText id="nachname"
+							value="#{angestellteBean.angestellte_nachname}" />
+						<h:outputLabel style="color:red;font-size:75%" for="nachname" value="Bitte eingeben"
+							rendered="#{angestellteBean.emptyField_nachname}" />
+					</h:panelGrid>
+					
+					<h:outputLabel for="bez" value="Bezeichnung*:" />
+					<h:panelGrid columns="1">
+						<p:autoComplete id="bez" dropdown="true"
+							value="#{angestellteBean.angestellte_bezeichnung}"
+							completeMethod="#{angestellteBean.completeAngestelltenbezeichnung}" />
+						<h:outputLabel style="color:red;font-size:75%" for="bez" value="Bitte eingeben"
+							rendered="#{angestellteBean.emptyField_bezeichnung}" />
+					</h:panelGrid>
+					
+				</h:panelGrid>
+				<!-- :display sorgt dafür, dass aus dem aktuellen Form rausgegangen wird(1 Schritt rückwärts) -->
+				<p:commandButton id="submitButton" value="Submit"
+					update=":display,:angeDlg"
+					actionListener="#{angestellteBean.erstelleAngestellte}" />
+
+			</h:form>
+		</p:dialog>
+		<h:form id="display">
+			<p:dataTable id="datenTabelle" var="angestellte"
+				value="#{angestellteBean.angestellte}" rendered="#{angestellteBean.showTable}">
+				<p:column>
+					<f:facet name="header">
+							ID
+						</f:facet>
+					<h:outputText value="#{angestellte.id}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							Vorname
+						</f:facet>
+					<h:outputText value="#{angestellte.vorname}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							Nachname
+						</f:facet>
+					<h:outputText value="#{angestellte.nachname}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							Bezeichnung
+						</f:facet>
+					<h:outputText
+						value="#{angestellte.angestelltenbezeichnungen.bezeichnung}" />
+
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+		<!-- 		<h:form id="display"> -->
+		<!-- 			<p:dataTable id="datenTabelle" var="ange" value="#{angestellteBean.ange}" rendered="#{angestellteBean.showTable}"> -->
+		<!-- 				<p:column> -->
+		<!-- 					<f:facet name="header"> -->
+		<!-- 							ID -->
+		<!-- 						</f:facet> -->
+		<!-- 					<h:outputText value="#{ange.id}" /> -->
+		<!-- 				</p:column> -->
+		<!-- 				<p:column> -->
+		<!-- 					<f:facet name="header"> -->
+		<!-- 							Bezeichnung -->
+		<!-- 						</f:facet> -->
+		<!-- 					<h:outputText value="#{ange.bezeichnung}" /> -->
+		<!-- 				</p:column> -->
+		<!-- 			</p:dataTable> -->
+		<!-- 		</h:form> -->
+	</h:body>
+</f:view>
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="Job Ticket" transaction-type="RESOURCE_LOCAL">
+		<class>de.rc.jobticket.entities.Angestellte</class>
+		<class>de.rc.jobticket.entities.Angestelltenbezeichnungen</class>
+		<class>de.rc.jobticket.entities.Job</class>
+		<class>de.rc.jobticket.entities.Jobbearbeiter</class>
+		<class>de.rc.jobticket.entities.Kosten</class>
+		<class>de.rc.jobticket.entities.Kunden</class>
+		<class>de.rc.jobticket.entities.Produkteigenschaften</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.221.31:3306/jobticket"/>
+			<property name="javax.persistence.jdbc.user" value="janine"/>
+			<property name="javax.persistence.jdbc.password" value="eninaj"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="eclipselink.logging.level" value="OFF"/>
+		</properties>
+	</persistence-unit>
+</persistence>

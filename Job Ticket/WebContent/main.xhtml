@@ -1,0 +1,619 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<f:view contentType="text/html" locale="de">
+	<pe:head title="Empty-Title"
+		shortcutIcon="#{request.contextPath}/favicon.ico">
+		<f:facet name="first">
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+			<meta http-equiv="pragma" content="no-cache" />
+			<meta http-equiv="cache-control" content="no-cache" />
+			<meta http-equiv="expires" content="0" />
+		</f:facet>
+	</pe:head>
+	<link type="text/css" rel="stylesheet" href="/Job_Ticket/mainstyle.css" />
+	<script type="text/javascript" src="/Job_Ticket/styling.js" />
+	<h:body>
+		<pe:ajaxErrorHandler />
+
+		<h:form id="mainForm" styleClass="mainForm">
+			<p:panelGrid id="headerGrid" styleClass="headerGrid">
+				<p:row>
+					<p:column styleClass="buttonColumn">
+						<p:commandButton value="▲" styleClass="button" />
+					</p:column>
+
+					<p:column colspan="5">
+						<p:panel header="JOBTICKET" styleClass="jobHeader" />
+					</p:column>
+					<p:column >
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column ></p:column>
+					<p:column styleClass="jobTicketLabel">
+						<h:outputLabel value="Jobnummer" for="jobnummer" />
+					</p:column>
+					<p:column>
+						<p:inputText id="jobnummer" value="#{mainBean.jobBean.jobnummer}"
+							disabled="true" styleClass="jobnummerFeld"/>
+					</p:column>
+					<p:column>
+					</p:column>
+					<p:column>
+						<h:outputLabel value="Alte Jobnummer" for="alte_jobnummer" />
+					</p:column>
+					<p:column>
+						<p:inputText id="alte_jobnummer"
+							value="#{mainBean.jobBean.alte_jobnummer}" styleClass="inputAltejobnummer"/>
+					</p:column>
+					<p:column>
+						<p:commandButton value="▼" styleClass="a_Job_Button" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column ></p:column>
+					<p:column  styleClass="jobTicketLabel">
+						<h:outputLabel value="Kundenname*" for="inputKundenname" />
+					</p:column>
+					<p:column>
+						<p:autoComplete id="inputKundenname"
+							value="#{mainBean.jobBean.kundenname}"
+							completeMethod="#{mainBean.jobBean.completeKundennamen}"
+							queryDelay="0" styleClass="jobTicketInputField">
+							<p:ajax event="itemSelect"
+								listener="#{mainBean.jobBean.findKundenKuerzel}"
+								update="inputKundenkuerzel" />
+						</p:autoComplete>
+						<h:outputLabel style="color:red;font-size:75%"
+							for="inputKundenname" value="Bitte eingeben"
+							rendered="#{mainBean.jobBean.emptyField_kunde}" />
+					</p:column>
+					<p:column>
+					</p:column>
+					<p:column>
+						<h:outputLabel value="Kundenkürzel*" for="inputKundenkuerzel" />
+					</p:column>
+					<p:column>
+						<p:autoComplete id="inputKundenkuerzel"
+							value="#{mainBean.jobBean.kundenkuerzel}"
+							completeMethod="#{mainBean.jobBean.completeKundenkuerzel}" styleClass="inputKundenkürzel">
+							<p:ajax event="itemSelect"
+								listener="#{mainBean.jobBean.findKundenname}"
+								update="inputKundenname" />
+						</p:autoComplete>
+					</p:column>
+					<p:column>
+						<p:commandButton value="+" styleClass="plusButton"
+							actionListener="#{mainBean.kundenBean.setDlgShouldBeHidden}"
+							update=":kundenDlg" />
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column ></p:column>
+					<p:column  styleClass="jobTicketLabel">
+						<h:outputLabel value="Job*" for="inputJobbez"  />
+					</p:column>
+
+					<p:column >
+						<p:inputText id="inputJobbez" value="#{mainBean.jobBean.job}" styleClass="jobTicketInputField"/>
+						<h:outputLabel style="color:red;font-size:75%" for="inputJobbez"
+							value="Bitte eingeben"
+							rendered="#{mainBean.jobBean.emptyField_job}" />
+					</p:column>
+				</p:row>
+				<p:row>
+				<p:column ></p:column>
+				<p:column ></p:column>
+				<p:column ></p:column>
+				<p:column ></p:column>
+				<p:column ></p:column>
+				<p:column></p:column>
+				<p:column ></p:column>
+				</p:row>
+			</p:panelGrid>
+			<ui:repeat var="produkt"
+				value="#{mainBean.produktBean.produktSammlung}">
+				<p:panelGrid id="produktGrid" styleClass="produktGrid">
+					<p:row>
+						<p:column styleClass="buttonColumn">
+							<p:commandButton value="-" styleClass="deleteProdukt"
+								update="@(form)"
+								rendered="#{mainBean.produktBean.showMinusProduktButton}"
+								actionListener="#{mainBean.produktBean.deleteProdukt}" />
+							
+						</p:column>
+						<p:column colspan="5">
+							<p:panel header="dassind32zeichenmitvielschummeln"
+								styleClass="produktHeader"></p:panel>
+						</p:column>
+						<p:column>
+							<p:commandButton value="" styleClass="erledigtButton" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column ></p:column>
+						<p:column>
+							<h:outputLabel value="Eingangsdatum*" for="eingangsDatum" />
+						</p:column>
+
+						<p:column>
+							<p:inputMask id="eingangsDatum" mask="99.99.9999"
+								value="#{produkt.eingang}" />
+							<h:outputLabel style="color:red;font-size:75%"
+								for="eingangsDatum" value="Bitte eingeben"
+								rendered="#{produkt.emptyField_eingang}" />
+						</p:column>
+						<p:column>
+						</p:column>
+						<p:column>
+							<h:outputLabel value="Vorlagedatum" for="vorlageDatum" />
+						</p:column>
+
+						<p:column>
+							<p:inputMask id="vorlageDatum" mask="99.99.9999"
+								value="#{produkt.vorlage}" />
+						</p:column>
+
+					</p:row>
+					<p:row>
+						<p:column ></p:column>
+						<p:column>
+							<h:outputLabel value="Fertigstellung" for="fertigstellungsDatum" />
+						</p:column>
+
+						<p:column>
+							<p:inputMask id="fertigstellungsDatum" mask="99.99.9999"
+								value="#{produkt.ausgang}" />
+						</p:column>
+
+					</p:row>
+
+					<p:row>
+						<p:column></p:column>
+						<p:column>
+							<h:outputLabel value="Beschreibung" for="beschreibung" />
+						</p:column>
+
+						<p:column colspan="4">
+							<p:inputTextarea id="beschreibung" autoResize="true"
+								value="#{produkt.produktbeschreibung}"
+								styleClass="beschreibungsfeld" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column ></p:column>
+						<p:column></p:column>
+						<p:column>
+							<p:commandButton value="#{produkt.printButtonText}"
+								actionListener="#{produkt.togglePrint}" update="@all"
+								styleClass="printButton" />
+						</p:column>
+						<p:column>
+						</p:column>
+						<p:column rendered="#{produkt.showPrint}">
+							<h:outputLabel value="Seitenzahl" for="seitenzahl" />
+						</p:column>
+						<p:column rendered="#{produkt.showPrint}">
+							<p:inputText id="seitenzahl" value="#{produkt.seitenzahl}" />
+						</p:column>
+					</p:row>
+					<p:row rendered="#{produkt.showPrint}">
+						<p:column ></p:column>
+						<p:columns>
+							<h:outputLabel value="Format" for="format" />
+						</p:columns>
+						<p:columns>
+							<p:inputText id="format" value="#{produkt.format}" />
+						</p:columns>
+						<p:column>
+						</p:column>
+						<p:columns>
+							<h:outputLabel value="Falzung" for="falzung" />
+						</p:columns>
+						<p:columns>
+							<p:inputText id="falzung" value="#{produkt.falzung}" />
+						</p:columns>
+					</p:row>
+					<p:row rendered="#{produkt.showPrint}">
+						<p:column ></p:column>
+						<p:columns>
+							<h:outputLabel value="Beschnitt" for="beschnitt" />
+						</p:columns>
+						<p:columns>
+							<p:inputText id="beschnitt" value="#{produkt.beschnitt}" />
+						</p:columns>
+						<p:column>
+						</p:column>
+						<p:columns>
+							<h:outputLabel value="Bindung" for="bindung" />
+						</p:columns>
+						<p:columns>
+							<p:inputText id="bindung" value="#{produkt.bindung}" />
+						</p:columns>
+					</p:row>
+					<p:row rendered="#{produkt.showPrint}">
+						<p:column></p:column>
+						<p:columns>
+							<h:outputLabel value="Farbe" for="farbe" />
+						</p:columns>
+						<p:columns>
+							<p:inputText id="farbe" value="#{produkt.farbe}" />
+						</p:columns>
+						<p:column>
+						</p:column>
+						<p:columns>
+							<h:outputLabel value="Proof" for="proof" />
+						</p:columns>
+						<p:columns>
+							<p:inputText id="proof" value="#{produkt.proof}" />
+						</p:columns>
+					</p:row>
+					<p:row rendered="#{produkt.showPrint}">
+						<p:column ></p:column>
+						<p:columns>
+							<h:outputLabel value="Sonderfarbe" for="sonderfarbe" />
+						</p:columns>
+						<p:columns>
+							<p:inputText id="sonderfarbe" value="#{produkt.sonderfarbe}" />
+						</p:columns>
+						<p:column>
+						</p:column>
+						<p:columns>
+							<h:outputLabel value="Dummy" for="dummy" />
+						</p:columns>
+						<p:columns>
+							<p:inputText id="dummy" value="#{produkt.dummy}" />
+						</p:columns>
+					</p:row>
+				</p:panelGrid>
+			</ui:repeat>
+			<p:panelGrid id="buttonGrid"  styleClass="buttonGrid">
+				<p:row>
+					<p:column>
+					<div class="buttonDiv">
+					<p:commandButton value="+" styleClass="produktPlusButton"
+					actionListener="#{mainBean.produktBean.addProdukt}"
+					update="@(form)" />
+				<p:commandButton value="-" styleClass="minusButton"
+					actionListener="#{mainBean.produktBean.renderMinusProduktButton}"
+					update="@(form)" />
+					</div>
+					</p:column>
+					</p:row>	
+			</p:panelGrid>
+			
+			
+			
+			<p:panelGrid id="aufwandGrid" styleClass="aufwandGrid">
+				<p:row>
+					<p:column styleClass="buttonColumn"></p:column>
+					<p:column colspan="5">
+						<p:panel header="Aufwand" styleClass="aufwandHeader">
+						</p:panel>
+					</p:column>
+				</p:row>
+				<p:row>
+				<p:column styleClass="minusButtonCell">
+						<ui:repeat var="angestellter"
+							value="#{mainBean.angestellteBean.angestelltenSammlung}">
+							<p:commandButton styleClass="angestellteLöschenButton" value="-"
+								rendered="#{mainBean.angestellteModel.renderMinus}"
+								actionListener="#{mainBean.angestellteBean.deleteAngestellten}"
+								update=":mainForm:aufwandGrid" />
+						</ui:repeat>
+					</p:column>
+
+					<p:columns styleClass="angestellteOutputLabel">
+						<ui:repeat var="angestellter"
+							value="#{mainBean.angestellteBean.angestelltenSammlung}">
+							<div>
+								<h:outputLabel value="#{angestellter.angestelltenbezeichnung}" styleClass="angestellteLabel"/>
+							</div>
+						</ui:repeat>
+					</p:columns>
+					<p:column styleClass="inputAngestellteColumn">
+						<ui:repeat var="angestellter"
+							value="#{mainBean.angestellteBean.angestelltenSammlung}">
+							<div>
+								<p:autoComplete value="#{angestellter.angestellte_name}"
+									completeMethod="#{angestellter.completeAngestelltenname}"
+									queryDelay="0" styleClass="angestellteInPutField">
+								</p:autoComplete>
+							</div>
+						</ui:repeat>
+					</p:column>
+					<p:column styleClass="angestellterButtonColumn">
+						<ui:repeat var="angestellter"
+							value="#{mainBean.angestellteBean.angestelltenSammlung}">
+							<div>
+								<p:commandButton value="▼" styleClass="angestellteplusButton"
+									actionListener="#{mainBean.angestellteBean.setDlgShouldBeHidden}"
+									update=":angeDlg" />
+							</div>
+						</ui:repeat>
+					</p:column>
+					<p:column styleClass="aufwandOutPutColumn">
+						<ui:repeat var="angestellter"
+							value="#{mainBean.angestellteBean.angestelltenSammlung}">
+							<div>
+								<h:outputLabel value="Aufwand in €"
+									rendered="#{mainBean.kostenBean.abrechnungInEuro}"
+									for="kostenInEuro" styleClass="outputLabel"/>
+								<h:outputLabel value="Aufwand in Std"
+									rendered="#{mainBean.kostenBean.abrechnungInStd}" styleClass="outputLabel"/>
+							</div>
+						</ui:repeat>
+					</p:column>
+					<p:columns styleClass="aufwandInPutColumn">
+						<ui:repeat var="angestellter"
+							value="#{mainBean.angestellteBean.angestelltenSammlung}">
+							<div>
+								<p:inputText id="kostenInEuro"
+									rendered="#{mainBean.kostenBean.abrechnungInEuro}"
+									value="#{mainBean.kostenBean.kostenInEuro}"
+									styleClass="aufwandInPutField">
+									<p:ajax event="blur" update="kostenInEuro" />
+								</p:inputText>
+								<p:inputText id="kostenInStd"
+									rendered="#{mainBean.kostenBean.abrechnungInStd}"
+									value="#{mainBean.kostenBean.kostenInStd}"
+									styleClass="aufwandInPutField">
+									<p:ajax event="blur" update="kostenInStd" />
+								</p:inputText>
+							</div>
+						</ui:repeat>
+					</p:columns>
+					<p:column styleClass="aufwandButtonColumn">
+						<ui:repeat var="angestellter"
+							value="#{mainBean.angestellteBean.angestelltenSammlung}">
+							<div>
+								<p:commandButton value="€" styleClass="aufwandButton"
+									id="kostenButton" update=":mainForm:aufwandGrid"
+									actionListener="#{mainBean.kostenBean.switchKosten}" />
+							</div>
+						</ui:repeat>
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column></p:column>
+					<p:column>
+						<p:commandButton value="+" styleClass="produktPlusButton"
+							actionListener="#{mainBean.angestellteBean.addAngestellten}"
+							update=":mainForm:aufwandGrid" />
+						<p:commandButton value="-" styleClass="minusButton"
+							actionListener="#{mainBean.angestellteModel.renderMinusButton}"
+							update=":mainForm:aufwandGrid" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+					</p:column>
+					<p:column colspan="5">
+						<p:separator styleClass="budgetSeparator separatorOben" />
+					</p:column>
+					<p:column>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:commandButton styleClass="achtungButton" value="!" />
+					</p:column>
+					<p:columns>
+					</p:columns>
+					<p:column>
+					</p:column>
+					<p:column>
+
+					</p:column>
+					<p:column>
+						<h:outputLabel value="Budget" for="budget" />
+					</p:column>
+					<p:columns>
+						<p:inputText id="budget" />
+					</p:columns>
+					<p:column>
+						<p:commandButton value="€" styleClass="budgetButton" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+					</p:column>
+					<p:column colspan="5">
+						<p:separator styleClass="budgetSeparator separatorUnten" />
+					</p:column>
+					<p:column>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:columns>
+					</p:columns>
+					<p:columns>
+					</p:columns>
+					<p:columns>
+					</p:columns>
+					<p:column>
+					</p:column>
+					<p:column>
+					</p:column>
+					<p:columns>
+						<p:commandButton value="Speichern" styleClass="speicherButton"
+							update="mainForm" actionListener="#{mainBean.speichern}" />
+					</p:columns>
+				</p:row>
+			</p:panelGrid>
+		</h:form>
+
+
+		<p:dialog id="angeDlg"
+			header="Neuen Angestellten in die Datenbank hinzufügen"
+			resizable="false"
+			visible="#{mainBean.angestellteBean.dlgShouldBeHidden}"
+			onHide="#{mainBean.angestellteBean.dlgShouldBeHidden}"
+			closable="false" styleClass="angeDlg">
+			<h:form id="angedlgForm" styleClass="angedlgForm">
+				<script type="text/javascript" src="/Job_Ticket/styling.js" />
+				<p:panelGrid styleClass="angeTable">
+					<p:row>
+						<p:column>
+							<h:outputLabel for="vorname" value="Neuer Vorname*:" />
+						</p:column>
+						<p:column>
+							<p:inputText id="vorname"
+								value="#{mainBean.angestellteModel.angestellte_vorname}"
+								styleClass="vorname" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column>
+						</p:column>
+						<p:column>
+							<h:outputLabel style="color:red;font-size:75%" for="vorname"
+								value="Bitte eingeben"
+								rendered="#{mainBean.angestellteModel.emptyField_vorname}" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column>
+							<h:outputLabel for="nachname" value="Neuer Nachname*:" />
+						</p:column>
+						<p:column>
+							<p:inputText id="nachname"
+								value="#{mainBean.angestellteModel.angestellte_nachname}" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column>
+						</p:column>
+						<p:column>
+							<h:outputLabel style="color:red;font-size:75%" for="nachname"
+								value="Bitte eingeben"
+								rendered="#{mainBean.angestellteModel.emptyField_nachname}" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column>
+							<h:outputLabel for="bez" value="Bezeichnung*:" />
+						</p:column>
+						<p:column>
+							<p:autoComplete id="bez" styleClass="angeDropDown"
+								dropdown="true"
+								value="#{mainBean.angestellteModel.angestelltenbezeichnung}"
+								completeMethod="#{mainBean.angestellteModel.completeAngestelltenbezeichnung}" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column>
+
+						</p:column>
+						<p:column>
+							<h:outputLabel style="color:red;font-size:75%" for="bez"
+								value="Bitte eingeben"
+								rendered="#{mainBean.angestellteModel.emptyField_bezeichnung}" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column>
+							<p:commandButton id="closeButton2" value="Schließen"
+								update=":angeDlg"
+								actionListener="#{mainBean.angestellteBean.setDlgShouldBeHidden}"
+								styleClass="dlgCloseButton" />
+						</p:column>
+						<p:column>
+							<p:commandButton id="submitButton" value="Speichern"
+								update=":angeDlg" styleClass="dlgSubmitButton"
+								actionListener="#{mainBean.angestellteModel.erstelleAngestellte}" />
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog id="kundenDlg"
+			header="Neuen Kunden in die Datenbank hinzufügen" resizable="false"
+			visible="#{mainBean.kundenBean.dlgShouldBeHidden}"
+			onHide="#{mainBean.kundenBean.dlgShouldBeHidden}" closable="false">
+			<h:form id="dlgForm">
+				<p:panelGrid style="margin-top:5px">
+					<p:row>
+						<p:column>
+							<h:outputLabel for="kunde" value="Neuer Kunde*:" />
+						</p:column>
+						<p:column>
+							<p:inputText id="kunde"
+								value="#{mainBean.kundenBean.kunde_kunde}" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column>
+						</p:column>
+						<p:column>
+							<h:outputLabel style="color:red;font-size:75%" for="kunde"
+								value="Bitte eingeben"
+								rendered="#{mainBean.kundenBean.emptyField_kunde}" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column>
+							<h:outputLabel for="kundenkuerzel" value="Neues Kundenkürzel*:" />
+						</p:column>
+						<p:column>
+							<p:inputText id="kundenkuerzel"
+								value="#{mainBean.kundenBean.kunde_kuerzel}" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column>
+						</p:column>
+						<p:column>
+							<h:outputLabel style="color:red;font-size:75%"
+								for="kundenkuerzel" value="Bitte eingeben"
+								rendered="#{mainBean.kundenBean.emptyField_kundenkuerzel}" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column>
+							<h:outputLabel for="adresse" value="Neue Adresse:" />
+						</p:column>
+						<p:column>
+							<p:inputText id="adresse"
+								value="#{mainBean.kundenBean.kunde_adresse}" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column>
+							<h:outputLabel for="telefon" value="Neue Telefonnummer:" />
+						</p:column>
+						<p:column>
+							<p:inputText id="telefon"
+								value="#{mainBean.kundenBean.kunde_telefon}" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column>
+							<p:commandButton id="closeButton" value="Schließen"
+								update=":kundenDlg"
+								actionListener="#{mainBean.kundenBean.setDlgShouldBeHidden}"
+								styleClass="dlgCloseButton" />
+						</p:column>
+						<p:column>
+							<p:commandButton id="submitButton" value="Speichern"
+								update=":kundenDlg" styleClass="dlgSubmitButton"
+								actionListener="#{mainBean.kundenBean.erstelleKunden}" />
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+	</h:body>
+</f:view>
+</html>

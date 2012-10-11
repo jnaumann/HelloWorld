@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+<f:view contentType="text/html" locale="de">
+	<pe:head title="Job-Ticket"
+		shortcutIcon="#{request.contextPath}/favicon.ico">
+		<f:facet name="first">
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+			<meta http-equiv="pragma" content="no-cache" />
+			<meta http-equiv="cache-control" content="no-cache" />
+			<meta http-equiv="expires" content="0" />
+		</f:facet>
+	</pe:head>
+	<h:body>
+		<pe:ajaxErrorHandler />
+
+		<h:form id="form">
+			<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+				<h:outputText value="Drucken: " />
+				<p:selectBooleanCheckbox value="#{indexBean.showPrint}">
+					<p:ajax update="lazypanel" />
+				</p:selectBooleanCheckbox>
+			</h:panelGrid>
+
+			<p:outputPanel id="lazypanel" layout="block">
+				<h:panelGroup rendered="#{indexBean.showPrint}">
+					<h:outputLabel for="beschnitt" value="Beschnitt:" />
+					<h:inputText id="beschnitt"
+						value="#{produkteigenschaften.beschnitt}" />
+				</h:panelGroup>
+			</p:outputPanel>
+			<p:commandButton value="OK" update="lazypanel" />
+		</h:form>
+
+		<h:form>
+			<h:panelGrid columns="4" cellpadding="5">
+				<h:outputLabel for="name" value="Neue Bezeichnung:"
+					style="font-weight:bold" />
+				<p:inputText id="name" value="#{indexBean.angestelltenbezeichnung}" />
+				<p:commandButton value="refresh" update="datenTabelle,display" />
+				<h:outputText value="#{indexBean.angestelltenbezeichnung}"
+					id="display" />
+			</h:panelGrid>
+		</h:form>
+		
+	</h:body>
+</f:view>
+</html>

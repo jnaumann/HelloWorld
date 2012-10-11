@@ -1,0 +1,392 @@
+@CHARSET "UTF-8";
+/*Farbe des Hintergrunds*/
+body {
+	background-color: #f5f1e8;
+}
+/*Zentrieren der gesamten Haupttabelle*/
+.mainGrid {
+	margin-left: auto;
+	margin-right: auto;
+}
+/*Löscht die Border um alle Grids*/
+.ui-panelgrid tr,.ui-panelgrid td {
+	border: 0px;
+}
+/* 	Einstellungen der Widgets */
+.ui-widget-content {
+	border: 0px;
+	color: #663300;
+	background-color: #f5f1e8; /*selbe Farbe wie der Hintergrund*/
+	font-size: 14px;
+}
+/* 	Eckige Ecken */
+.ui-corner-all {
+	moz-border-radius: 0px;
+	webkit-border-radius: 0px;
+	border-radius: 0px;
+	border: none;
+}
+/* 	Kopfelement in allen Widgets */
+.ui-widget-header {
+	background: linear-gradient(top, #663300, #000) !important;
+	background: -webkit-gradient(linear, left top, left bottom, from(#663300),
+		to(#000) ) !important;
+	background: -moz-linear-gradient(top, #663300, #000) !important;
+	-moz-box-shadow: 2px 2px 10px #AAA;
+	-webkit-box-shadow: 2px 2px 10px #AAA;
+	box-shadow: 2px 2px 10px #AAA;
+	color: white;
+}
+/*Verschiebung des HeaderSchriftzuges*/
+.ui-panel .ui-panel-titlebar {
+	padding: 6px 0px 6px 15px !important;
+}
+
+/*Anpassung aller labels an den Headerschriftzug*/
+label {
+	padding-left: 15px !important;
+}
+/* Schatten der Eingabefelder*/
+.ui-widget-content .ui-inputfield {
+	-moz-box-shadow: inset 2px 2px 2px #ccc;
+	-webkit-box-shadow: inset 2px 2px 2px #ccc;
+	box-shadow: inset 2px 2px 2px #ccc;
+	border: none;
+}
+/* Schatten und Border aller Buttons*/
+.ui-widget-content .ui-button {
+	-moz-box-shadow: 2px 2px 8px #AAA;
+	-webkit-box-shadow: 2px 2px 8px #AAA;
+	box-shadow: 2px 2px 8px #AAA;
+	border: none;
+	background: linear-gradient(top, rgba(255, 255, 255, 0.8),
+		rgba(255, 255, 255, 0) );
+	background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255,
+		0.8) ), to(rgba(255, 255, 255, 0) ) );
+	background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.8),
+		rgba(255, 255, 255, 0) );
+	color: #663300;
+}
+/*Mouseoververhalten aller Widgets*/
+.ui-state-hover,.ui-widget-content .ui-state-hover,.ui-widget-header .ui-state-hover,.ui-state-focus,.ui-widget-content .ui-state-focus,.ui-widgt-header .ui-state-focus
+	{
+	-moz-box-shadow: 0px 0px 2px #663300;
+	-webkit-box-shadow: 0px 0px 2px #663300;
+	box-shadow: 0px 0px 2px #663300;
+}
+/*Aktivverhalten aller Widgets*/
+.ui-state-focus,.ui-widget-content .ui-state-focus,.ui-widget-header .ui-state-focus
+	{
+	-moz-box-shadow: inset 0px 0px 5px #663300 !important;
+	-webkit-box-shadow: inset 0px 0px 5px #663300 !important;
+	box-shadow: inset 0px 0px 5px #663300 !important;
+}
+
+/* Eigenschaften des JobnummerEingabefeldes*/
+.jobnummerFeld {
+	background-color: #f7f4ec !important;
+	opacity: 1 !important;
+}
+/* Eigenschaften des Beschreibungsfeldes*/
+.beschreibungsfeld {
+	width: 98% !important;
+}
+/*Abstand des MinusButtons zum PlusButton*/
+.minusButton {
+	margin-left: 5px !important;
+}
+/*Anpassung der Buttons an den Headerschriftzug*/
+.produktPlusButton,.dlgClosetButton {
+	margin-left: 15px !important;
+}
+/*Verlauf*/
+.produktPlusButton,.plusButton,.minusButton,.a_Job_Button,.printButton,.speicherButton,.angestellteplusButton,.angestellteplusButton,.ui-widget-content .ui-selectonemenu-trigger,.dlgSubmitButton,.dlgCloseButton
+	{
+	/* 	background: linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)) !important; */
+	/* 	background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.8)), to(rgba(255, 255, 255, 0))) !important; */
+	/* 	background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)) !important; */
+	
+}
+/*Größe der Hinzufüge- oder AusklappButton*/
+.produktPlusButton,.plusButton,.minusButton,.a_Job_Button,.angestellteplusButton,.printButton,.budgetButton
+	{
+	width: 24px !important;
+	height: 24px !important;
+}
+/*Eigenschaften des alteJobnummer-Buttons*/
+.a_Job_Button {
+	margin-bottom: 5px;
+}
+/* Zentrieren des Buttontextes*/
+.plusButton .ui-button-text,.minusButton .ui-button-text,.angestellteplusButton .ui-button-text,.printButton 
+.ui-button-text,.a_Job_Button .ui-button-text,.button 
+.ui-button-text,.produktPlusButton .ui-button-text,.angestellteLöschenButton .ui-button-text,.achtungButton .ui-button-text,
+.budgetButton .ui-button-text, .deleteProdukt .ui-button-text
+	{
+	padding: 0px 0px 0px 0px !important;
+}
+.deleteProdukt{
+	width:28px;
+	height: 28px;
+	margin-left: 45%;
+	margin-bottom:20%;
+	background: none !important;
+	background-color: #e30062 !important;
+	color: white !important;	
+}
+.plusButton,.a_Job_Button,.angestellteplusButton,.erledigtButton,.budgetButton
+	{
+	margin-left: -40% !important;
+}
+/*Button mit dem Häkchen*/
+.erledigtButton {
+	background-image: url("/Job_Ticket/Pictures/haken5.png") !important;
+	width: 28px;
+	height: 28px;
+	margin-bottom: 20%;
+}
+.minusButtonCell{
+	width: 24px;
+}
+
+.angestellteLöschenButton,.achtungButton {
+	/* 	background: none !important; */
+	width: 24px;
+	height: 24px;
+	margin-left: 45%;
+	
+	
+	/* 	background: linear-gradient(top, rgba(0, 0, 0, 0), */
+	/* 		rgba(0, 0, 0, 0.3) ); */
+	/* 	background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0) */
+	/* 		), to(rgba(0, 0, 0, 0.3) ) ) !important; */
+	/* 	background: -moz-linear-gradient(top, rgba(0, 0, 0, 0), */
+	/* 		rgba(0, 0, 0, 0.3) ); */
+	background: none !important;
+	background-color: #e30062 !important;
+	color: white !important;
+}
+/* Eigenschaften des Jobticketbuttons*/
+.button {
+	background: linear-gradient(top, #663300, #000) !important;
+	background: -webkit-gradient(linear, left top, left bottom, from(#663300),
+		to(#000) ) !important;
+	background: -moz-linear-gradient(top, #663300, #000) !important;
+	/*background-color:#a28946 !important; */
+	width: 28px;
+	height: 28px;
+	margin-bottom: 50%;
+	margin-left: 45%;
+	color: white !important;
+}
+
+/*einrücken des Closebuttons im dialogfeld*/
+.dlgCloseButton{			
+    margin-left: 15px !important;
+}
+
+/*Einstellung des Speicherbuttons*/
+.ui-widget .speicherButton {
+	width: 100%;
+}
+.inputAngestellteColumn,.aufwandInPutColumn{
+	padding-bottom: 10px !important;
+}
+/* .angestellteOutputLabel{ */
+/* 	padding-bottom: 30px !important; */
+	
+/* } */
+.angestellteOutputLabel div,.aufwandOutPutColumn div{
+	margin-bottom: 18px;
+}
+
+.angestellterButtonColumn,.aufwandButtonColumn{
+	padding-bottom: 9px !important;
+}
+
+.angestellterButtonColumn button,.aufwandButtonColumn button{
+	margin-bottom:10px;
+}
+.angestellteLöschenButton, .angestellteInPutField input,.aufwandInPutField {
+	
+	margin-bottom: 10px;
+}
+.angeTable {
+	margin-bottom: 10px;
+	width: 400px;
+}
+
+.angeDropDown input {
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	border-radius: 0px;
+}
+
+.angeDropDown button {
+	margin-left: 3%;
+	position: absolute;
+	width: 24px;
+	height: 24px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	border-radius: 0px;
+	width: 24px;
+}
+
+.angeDropDown button .ui-button-text {
+	text-indent: 0px;
+}
+
+.angeDropDown button .ui-icon-triangle-1-s {
+	visibility: hidden;
+}
+
+.budgetSeparator {
+	-webkit-box-shadow: inset 1px 1px 1px #ccc !important;
+	background-color: white !important;
+	height: 3px;
+	border: none !important;
+}
+
+.separatorOben {
+	margin-bottom: -2px;
+}
+
+.separatorUnten {
+	margin-top: -2px;
+}
+
+/* Passt den header der Tabs an die breite an */
+.produktTabview .ui-tabs-nav { /* 	margin-left: auto; */
+	/* 	margin-right: auto; */
+	width: 99%;
+	height: 100%;
+	background: none !important;
+	position: absolute;
+	margin-top: -34px;
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+/* Tabs für die Produktauswahl */
+.produktTabview .ui-tabs-nav .ui-corner-top {
+	float: right;
+	border: none !important;
+	top: 0px !important;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	border-radius: 0px ;
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	background: none !important;
+	background-color: white !important;
+	width: 18px;
+	height: 18px;
+	margin: 4px 6px 6px 0px;
+	z-index: 2;
+}
+
+/* Positionierung der Texte der Tabs*/
+.produktTabview .ui-tabs-nav .ui-corner-top a {
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	padding: 0px;
+	padding-left: 3px;
+	padding-top: 0px;
+	color: #663300;
+	
+}
+
+.produktTabview .ui-tabs-nav .ui-state-active  {
+/* 	-webkit-box-shadow: inset 0px 0px 5px #F00 !important; */
+	font-size: 19px;
+	width: 22px;
+	height: 22px;
+}
+
+.produktTabview .ui-tabs-nav .tabDone{
+	background-color: green !important;
+}
+
+.produktTabview .ui-tabs-nav .tabDone a{
+	color: white;
+}
+
+.produktTabview {
+	background: none !important;
+}
+
+.produktHeader .ui-panel-titlebar {
+	z-index: 1;
+	height: 17px;
+}
+
+.produktHeader .ui-panel-content,.produktTabview .ui-tabs-panels {
+	display: none;
+}
+
+ .ui-datatable tr,.ui-datatable td {
+	border: none !important;
+}
+.angestellteLable{
+	padding-left: 5px;
+}
+.angestellteOutput{
+	padding-left: 35px;
+}
+
+thead {
+	display: none;
+}
+
+/*Alles zum DropDownMenue*/
+
+/* <p:selectOneMenu id="falzung" */
+/* value="#{mainBean.produktBean.falzung}"  */
+/* styleClass="dropDownFalzung"> */
+/* <f:selectItem itemLabel="Select One" itemValue="" />  */
+/* <f:selectItems value="#{mainBean.produktBean.falzungsarten}" /> */
+/* </p:selectOneMenu> --> */
+
+/* Einstellungen des DropDownMenues*/
+/* .dropDownFalzung { */
+/* 	width: 100% !important; */
+/* 	-moz-box-shadow: inset 2px 2px 2px #ccc; */
+/* 	-webkit-box-shadow: inset 2px 2px 2px #ccc; */
+/* 	box-shadow: inset 2px 2px 2px #ccc; */
+/* 	border: none !important; */
+/* } */
+
+/* Breite des Div´s des DropDownMenues */
+/* .ui-helper-hidden-accessible { */
+/* 	width: 100%; */
+/* } */
+/*Einstellungen des DropDownMenueButtons*/
+/* .ui-widget-content .ui-selectonemenu-trigger { */
+/* 	width: 25px; */
+/* 	padding-left: 10px !important; */
+/* 	moz-border-radius: 0px; */
+/* 	webkit-border-radius: 0px; */
+/* 	border-radius: 0px; */
+/* 	border: none !important; */
+/* } */
+/*Einstellung des Icons im DropdownMenue */
+/* .ui-widget-content .ui-selectonemenu-trigger .ui-icon { */
+/* 	background-image: url("/Job_Ticket/Pictures/arrow_down2.png"); */
+/* 	margin-top: 7px !important; */
+/* 	margin-left: 3px !important; */
+/* 	-moz-border-radius: 0px; */
+/* 	-webkit-border-radius: 0px; */
+/* 	border-radius: 0px; */
+/* 	background-position: 0px; */
+/* } */
+/*Farbe des DropDownMenueLabels*/
+/* .ui-selectonemenu-label { */
+/* 	background: white; */
+/* 	width: 106px !important; */
+/* 	height: 16px !important; */
+/* 	padding-top: 8px !important; */
+/* } */

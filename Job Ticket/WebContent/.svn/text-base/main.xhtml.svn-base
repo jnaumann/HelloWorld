@@ -1,0 +1,364 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<f:view contentType="text/html" locale="de">
+	<pe:head title="Empty-Title"
+		shortcutIcon="#{request.contextPath}/favicon.ico">
+		<f:facet name="first">
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+			<meta http-equiv="pragma" content="no-cache" />
+			<meta http-equiv="cache-control" content="no-cache" />
+			<meta http-equiv="expires" content="0" />
+		</f:facet>
+	</pe:head>
+	<link type="text/css" rel="stylesheet" href="/Job_Ticket/mainstyle.css" />
+	<h:body>
+		<pe:ajaxErrorHandler />
+		<h:form id="mainForm" style="padding-left:25%">
+
+			<p:panelGrid id="mainGrid">
+				<p:row>
+					<p:column colspan="4">
+						<p:panel header="JOBTICKET" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<h:outputLabel value="Jobnummer" for="jobnummer" />
+					</p:column>
+					<p:column>
+						<p:inputText id="jobnummer" value="#{mainBean.jobBean.jobnummer}"
+							disabled="true" />
+					</p:column>
+					<p:column>
+						<h:outputLabel value="Alte Jobnummer" for="alte_jobnummer" />
+					</p:column>
+					<p:column>
+						<p:inputText id="alte_jobnummer"
+							value="#{mainBean.jobBean.alte_jobnummer}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<h:outputLabel value="Kundenname*" for="inputKundenname" />
+					</p:column>
+					<p:column>
+						<p:autoComplete id="inputKundenname"
+							value="#{mainBean.jobBean.kundenname}"
+							completeMethod="#{mainBean.jobBean.completeKundennamen}"
+							queryDelay="0">
+							<p:ajax event="itemSelect"
+								listener="#{mainBean.jobBean.findKundenKuerzel}"
+								update="inputKundenkuerzel" />
+						</p:autoComplete>
+						<h:outputLabel style="color:red;font-size:75%"
+							for="inputKundenname" value="Bitte eingeben"
+							rendered="#{mainBean.jobBean.emptyField_kunde}" />
+					</p:column>
+
+					<p:column>
+						<h:outputLabel value="Kundenkürzel*" for="inputKundenkuerzel" />
+					</p:column>
+					<p:column>
+						<p:autoComplete id="inputKundenkuerzel"
+							value="#{mainBean.jobBean.kundenkuerzel}"
+							completeMethod="#{mainBean.jobBean.completeKundenkuerzel}">
+							<p:ajax event="itemSelect"
+								listener="#{mainBean.jobBean.findKundenname}"
+								update="inputKundenname" />
+						</p:autoComplete>
+					</p:column>
+					<p:column>
+						<p:commandButton value="+" styleClass="plusButton"
+							actionListener="#{mainBean.kundenBean.setDlgShouldBeHidden}"
+							update=":kundenDlg" />
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column>
+						<h:outputLabel value="Job" for="inputJobbez" />
+					</p:column>
+
+					<p:column>
+						<p:inputText id="inputJobbez" value="#{mainBean.jobBean.job}" />
+						<h:outputLabel style="color:red;font-size:75%" for="inputJobbez"
+							value="Bitte eingeben"
+							rendered="#{mainBean.jobBean.emptyField_job}" />
+					</p:column>
+
+				</p:row>
+				<p:row>
+					<p:column colspan="4">
+						<p:panel header="0000_empty" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<h:outputLabel value="Eingangsdatum*" for="eingangsDatum" />
+					</p:column>
+
+					<p:column>
+						<p:inputMask id="eingangsDatum" mask="99.99.9999"
+							value="#{mainBean.produktBean.eingang}" />
+						<h:outputLabel style="color:red;font-size:75%" for="eingangsDatum"
+							value="Bitte eingeben"
+							rendered="#{mainBean.produktBean.emptyField_eingang}" />
+					</p:column>
+
+					<p:column>
+						<h:outputLabel value="Vorlagedatum" for="vorlageDatum" />
+					</p:column>
+
+					<p:column>
+						<p:inputMask id="vorlageDatum" mask="99.99.9999"
+							value="#{mainBean.produktBean.vorlage}" />
+					</p:column>
+
+				</p:row>
+				<p:row>
+					<p:column>
+						<h:outputLabel value="Fertigstellung" for="fertigstellungsDatum" />
+					</p:column>
+
+					<p:column>
+						<p:inputMask id="fertigstellungsDatum" mask="99.99.9999"
+							value="#{mainBean.produktBean.ausgang}" />
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column>
+						<h:outputLabel value="Beschreibung" for="beschreibung" />
+					</p:column>
+
+					<p:column colspan="3">
+						<p:inputTextarea id="beschreibung" autoResize="true"
+							value="#{mainBean.produktBean.produktbeschreibung}"
+							style="width:98%" />
+					</p:column>
+				</p:row>
+
+
+				<p:row>
+					<p:column></p:column>
+					<p:column>
+						<p:commandButton value="#{mainBean.produktBean.printButtonText}"
+							actionListener="#{mainBean.produktBean.togglePrint}"
+							update="mainGrid" />
+					</p:column>
+					<p:column rendered="#{mainBean.produktBean.showPrint}">
+						<h:outputLabel value="Seitenzahl" for="seitenzahl" />
+					</p:column>
+					<p:column rendered="#{mainBean.produktBean.showPrint}">
+						<p:inputText id="seitenzahl"
+							value="#{mainBean.produktBean.seitenzahl}" />
+					</p:column>
+				</p:row>
+
+				<p:row rendered="#{mainBean.produktBean.showPrint}">
+					<p:columns>
+						<h:outputLabel value="Format" for="format" />
+					</p:columns>
+					<p:columns>
+						<p:inputText id="format" value="#{mainBean.produktBean.format}" />
+					</p:columns>
+					<p:columns>
+						<h:outputLabel value="Falzung" for="falzung" />
+					</p:columns>
+					<p:columns>
+						<h:selectOneMenu id="falzung"
+							value="#{mainBean.produktBean.falzung}">
+							<f:selectItem itemLabel="Select One" itemValue="" />
+							<f:selectItems value="#{mainBean.produktBean.falzungsarten}" />
+						</h:selectOneMenu>
+					</p:columns>
+				</p:row>
+
+				<p:row rendered="#{mainBean.produktBean.showPrint}">
+					<p:columns>
+						<h:outputLabel value="Beschnitt" for="beschnitt" />
+					</p:columns>
+					<p:columns>
+						<p:inputText id="beschnitt"
+							value="#{mainBean.produktBean.beschnitt}" />
+					</p:columns>
+					<p:columns>
+						<h:outputLabel value="Bindung" for="bindung" />
+					</p:columns>
+					<p:columns>
+						<p:inputText id="bindung" value="#{mainBean.produktBean.bindung}" />
+					</p:columns>
+				</p:row>
+				<p:row rendered="#{mainBean.produktBean.showPrint}">
+					<p:columns>
+						<h:outputLabel value="Farbe" for="farbe" />
+					</p:columns>
+					<p:columns>
+						<p:inputText id="farbe" value="#{mainBean.produktBean.farbe}" />
+					</p:columns>
+					<p:columns>
+						<h:outputLabel value="Proof" for="proof" />
+					</p:columns>
+					<p:columns>
+						<p:inputText id="proof" value="#{mainBean.produktBean.proof}" />
+					</p:columns>
+				</p:row>
+				<p:row rendered="#{mainBean.produktBean.showPrint}">
+					<p:columns>
+						<h:outputLabel value="Sonderfarbe" for="sonderfarbe" />
+					</p:columns>
+					<p:columns>
+						<p:inputText id="sonderfarbe"
+							value="#{mainBean.produktBean.sonderfarbe}" />
+					</p:columns>
+					<p:columns>
+						<h:outputLabel value="Dummy" for="dummy" />
+					</p:columns>
+					<p:columns>
+						<p:inputText id="dummy" value="#{mainBean.produktBean.dummy}" />
+					</p:columns>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:commandButton value="+" styleClass="plusButton" />
+						<p:commandButton value="-" styleClass="minusButton" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column colspan="4">
+						<p:panel header="Aufwand">
+						</p:panel>
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:columns>
+						<h:outputLabel value="Angestellte" for="inputAngestellte" />
+					</p:columns>
+					<p:column>
+						<p:autoComplete id="inputAngestellte"
+							value="#{mainBean.angestellteBean.angestellte_name}"
+							completeMethod="#{mainBean.angestellteBean.completeAngestelltenname}"
+							queryDelay="0">
+						</p:autoComplete>
+					</p:column>
+
+					<p:column>
+						<h:commandButton value="▼" styleClass="angestellteplusButton"
+							actionListener="#{mainBean.angestellteBean.setDlgShouldBeHidden}"
+							update=":angeDlg" />
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:columns>
+					</p:columns>
+					<p:columns>
+					</p:columns>
+					<p:columns>
+					</p:columns>
+					<p:columns>
+						<p:commandButton value="Speichern" styleClass="speicherButton"
+							actionListener="#{mainBean.speichern}" update=":mainForm" />
+					</p:columns>
+				</p:row>
+			</p:panelGrid>
+		</h:form>
+
+		<p:dialog id="angeDlg"
+			header="Neuen Angestellten in die Datenbank hinzufügen"
+			resizable="false"
+			visible="#{mainBean.angestellteBean.dlgShouldBeHidden}"
+			onHide="#{mainBean.angestellteBean.dlgShouldBeHidden}"
+			closable="false">
+			<h:form id="angedlgForm">
+				<h:panelGrid columns="2" style="margin-bottom:10px">
+					<h:outputLabel for="vorname" value="Neuer Vorname*:" />
+					<h:panelGrid columns="1">
+						<p:inputText id="vorname"
+							value="#{mainBean.angestellteBean.angestellte_vorname}" />
+						<h:outputLabel style="color:red;font-size:75%" for="vorname"
+							value="Bitte eingeben"
+							rendered="#{mainBean.angestellteBean.emptyField_vorname}" />
+					</h:panelGrid>
+
+					<h:outputLabel for="nachname" value="Neuer Nachname*:" />
+					<h:panelGrid columns="1">
+						<p:inputText id="nachname"
+							value="#{mainBean.angestellteBean.angestellte_nachname}" />
+						<h:outputLabel style="color:red;font-size:75%" for="nachname"
+							value="Bitte eingeben"
+							rendered="#{mainBean.angestellteBean.emptyField_nachname}" />
+					</h:panelGrid>
+
+					<h:outputLabel for="bez" value="Bezeichnung*:" />
+					<h:panelGrid columns="1">
+						<p:autoComplete id="bez" dropdown="true"
+							value="#{mainBean.angestellteBean.angestellte_bezeichnung}"
+							completeMethod="#{mainBean.angestellteBean.completeAngestelltenbezeichnung}" />
+						<h:outputLabel style="color:red;font-size:75%" for="bez"
+							value="Bitte eingeben"
+							rendered="#{mainBean.angestellteBean.emptyField_bezeichnung}" />
+					</h:panelGrid>
+
+				</h:panelGrid>
+				<p:commandButton id="submitButton" value="Submit" update=":angeDlg"
+					actionListener="#{mainBean.angestellteBean.erstelleAngestellte}" />
+				<p:commandButton id="closeButton2" value="Close" update=":angeDlg"
+					actionListener="#{mainBean.angestellteBean.setDlgShouldBeHidden}" />
+			</h:form>
+		</p:dialog>
+
+		<p:dialog id="kundenDlg"
+			header="Neuen Kunden in die Datenbank hinzufügen" resizable="false"
+			visible="#{mainBean.kundenBean.dlgShouldBeHidden}"
+			onHide="#{mainBean.kundenBean.dlgShouldBeHidden}" closable="false">
+			<h:form id="dlgForm">
+				<h:panelGrid columns="2" style="margin-bottom:10px">
+					<h:outputLabel for="kunde" value="Neuer Kunde*:" />
+					<h:panelGrid columns="1">
+						<p:inputText id="kunde" value="#{mainBean.kundenBean.kunde_kunde}" />
+						<h:outputLabel style="color:red;font-size:75%" for="kunde"
+							value="Bitte eingeben"
+							rendered="#{mainBean.kundenBean.emptyField_kunde}" />
+					</h:panelGrid>
+
+					<h:outputLabel for="kundenkuerzel" value="Neues Kundenkürzel*:" />
+					<h:panelGrid columns="1">
+						<p:inputText id="kundenkuerzel"
+							value="#{mainBean.kundenBean.kunde_kuerzel}" />
+						<h:outputLabel style="color:red;font-size:75%" for="kundenkuerzel"
+							value="Bitte eingeben"
+							rendered="#{mainBean.kundenBean.emptyField_kundenkuerzel}" />
+					</h:panelGrid>
+
+					<h:outputLabel for="adresse" value="Neue Adresse:" />
+					<p:inputText id="adresse"
+						value="#{mainBean.kundenBean.kunde_adresse}" />
+					<h:outputLabel for="telefon" value="Neue Telefonnummer:" />
+					<p:inputText id="telefon"
+						value="#{mainBean.kundenBean.kunde_telefon}" />
+
+				</h:panelGrid>
+
+
+				<p:commandButton id="submitButton" value="Submit"
+					update=":kundenDlg"
+					actionListener="#{mainBean.kundenBean.erstelleKunden}" />
+
+				<p:commandButton id="closeButton" value="Close" update=":kundenDlg"
+					actionListener="#{mainBean.kundenBean.setDlgShouldBeHidden}" />
+
+			</h:form>
+		</p:dialog>
+
+	</h:body>
+</f:view>
+</html>

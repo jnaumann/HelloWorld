@@ -1,0 +1,8 @@
+Die Generierung der Bezeichnung, fŸr das Jobticket, wird beim HinzufŸgen erstellt und generiert.
+
+Evtl wird aber auch schon ein vordefiniertes jobticket erstellt, dass einfach leer ist, damit zur Zeit der Erstellung 
+die Jobticketnummer bereits vorhanden ist.
+
+
+verifizierung des Datums: Der Eingang wird von der Inputmaske mit den Trennzeichen Ÿbergeben wodurch man den string wieder
+splitten muss und richtig einordnet. Au§erdem muss die validierung klappen damit das datum die bereits passende form hat.

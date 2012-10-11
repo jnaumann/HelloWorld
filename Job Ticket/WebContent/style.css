@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+
+.ui-panelgrid tr,.ui-panelgrid td {
+	border: 0px;
+}
+
+.ui-widget-content {
+	border: 0px;
+}
+
+.plusButton,.minusButton {
+	width: 45px;
+}
+
+.speicherButton {
+	width: 100%;
+}
